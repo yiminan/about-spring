@@ -3,12 +3,12 @@ package com.example.aboutspring.util.jackson.objectmapper;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class ObjectMapperTest {
@@ -60,5 +60,17 @@ class ObjectMapperTest {
         // then
         assertThat(userAsString)
                 .isEqualTo("{\"name\":\"Ryan\",\"age\":30}");
+    }
+
+    @Test
+    void readTree() throws JsonProcessingException {
+        String json = "{\"name\":\"Ryan\",\"age\":30}";
+
+        JsonNode jsonNode = objectMapper.readTree(json);
+
+        assertThat(jsonNode.get("name").asText())
+                .isEqualTo("Ryan");
+        assertThat(jsonNode.get("age").asInt())
+                .isEqualTo(30);
     }
 }
