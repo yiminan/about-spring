@@ -64,10 +64,13 @@ class ObjectMapperTest {
 
     @Test
     void readTree() throws JsonProcessingException {
+        // given
         String json = "{\"name\":\"Ryan\",\"age\":30}";
 
+        // when
         JsonNode jsonNode = objectMapper.readTree(json);
 
+        // then
         assertThat(jsonNode.get("name").asText())
                 .isEqualTo("Ryan");
         assertThat(jsonNode.get("age").asInt())
