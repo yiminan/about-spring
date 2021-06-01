@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class ObjectMapperTest {
@@ -75,5 +76,11 @@ class ObjectMapperTest {
                 .isEqualTo("Ryan");
         assertThat(jsonNode.get("age").asInt())
                 .isEqualTo(30);
+    }
+
+    @DisplayName("test")
+    @Test
+    void test() {
+
     }
 }
