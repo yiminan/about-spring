@@ -84,7 +84,7 @@ class ObjectMapperTest {
     }
 
     @Test
-    void readValue() throws JsonProcessingException {
+    void readValueForList() throws JsonProcessingException {
         String jsonArr = "[{\"name\":\"Ryan\",\"age\":30},{\"name\":\"Jake\",\"age\":20}]";
         List<User> users = objectMapper.readValue(jsonArr, new TypeReference<>() {
         });
@@ -92,4 +92,6 @@ class ObjectMapperTest {
         assertThat(users).extracting("name", "age")
                 .contains(tuple("Ryan", 30), tuple("Jake", 20));
     }
+
+
 }
