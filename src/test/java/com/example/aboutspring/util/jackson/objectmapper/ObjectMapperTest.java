@@ -14,6 +14,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Map;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class ObjectMapperTest {
@@ -93,5 +95,15 @@ class ObjectMapperTest {
                 .contains(tuple("Ryan", 30), tuple("Jake", 20));
     }
 
-
+    @Test
+    void readValueForMap() throws JsonProcessingException {
+        String jsonArr = "{\"name\":\"Ryan\",\"age\":30}";
+        Map<String, Object> user = objectMapper.readValue(jsonArr, new TypeReference<>() {
+        });
+        assertThat(user).hasSize(2);
+        assertThat(user).extractingByKey("name")
+                .isEqualTo("Ryan");
+        assertThat(user).extractingByKey("age")
+                .isEqualTo(30);
+    }
 }
