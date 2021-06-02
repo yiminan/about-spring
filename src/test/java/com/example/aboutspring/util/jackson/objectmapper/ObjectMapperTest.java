@@ -2,6 +2,7 @@ package com.example.aboutspring.util.jackson.objectmapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -21,7 +22,8 @@ class ObjectMapperTest {
         private final String name;
         private final int age;
 
-        public User(String name, int age) {
+        @JsonCreator
+        public User(@JsonProperty("name") String name, @JsonProperty("age") int age) {
             this.name = name;
             this.age = age;
         }
