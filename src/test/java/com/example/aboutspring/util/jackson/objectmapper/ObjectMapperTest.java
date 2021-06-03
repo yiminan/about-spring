@@ -101,9 +101,14 @@ class ObjectMapperTest {
 
     @Test
     void readValueForMap() throws JsonProcessingException {
+        // given
         String jsonArr = "{\"name\":\"Ryan\",\"age\":30}";
+
+        // when
         Map<String, Object> user = objectMapper.readValue(jsonArr, new TypeReference<>() {
         });
+
+        // then
         assertThat(user).hasSize(2);
         assertThat(user).extractingByKey("name")
                 .isEqualTo("Ryan");
