@@ -85,6 +85,19 @@ class ObjectMapperTest {
     }
 
     @Test
+    void readValueForObject() throws JsonProcessingException {
+        // given
+        String jsonUser = "{\"name\":\"Ryan\",\"age\":30}";
+
+        // when
+        User user = objectMapper.readValue(jsonUser, User.class);
+
+        // then
+        assertThat(user).isNotNull();
+        assertThat(user).isEqualTo(new User("Ryan", 30));
+    }
+
+    @Test
     void readValueForList() throws JsonProcessingException {
         // given
         String jsonArr = "[{\"name\":\"Ryan\",\"age\":30},{\"name\":\"Jake\",\"age\":20}]";
