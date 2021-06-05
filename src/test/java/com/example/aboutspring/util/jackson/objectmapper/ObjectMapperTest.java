@@ -160,4 +160,18 @@ class ObjectMapperTest {
         assertThatThrownBy(() -> objectMapper.readValue(json, User.class))
                 .isInstanceOf(UnrecognizedPropertyException.class);
     }
+
+    @Test
+    void readValueJsonHasPropertiesThatObjectDoesNotHave() throws JsonProcessingException {
+        // given
+        String json = "{\"name\":\"Ryan\",\"age\":30,\"sex\":\"M\"}";
+
+        // when
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        User user = objectMapper.readValue(json, User.class);
+
+        // then
+        assertThat(user).isNotNull();
+        assertThat(user).isEqualTo(new User("Ryan", 30));
+    }
 }
