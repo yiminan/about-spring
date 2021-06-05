@@ -1,14 +1,17 @@
 package com.example.aboutspring.util.jackson.objectmapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.Assertions.tuple;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -16,6 +19,7 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class ObjectMapperTest {
@@ -145,5 +149,15 @@ class ObjectMapperTest {
                 .isEqualTo("Ryan");
         assertThat(user).extractingByKey("age")
                 .isEqualTo(30);
+    }
+
+    @Test
+    void exceptionToReadValueJsonHasPropertiesThatObjectDoesNotHave() {
+        // given
+        String json = "{\"name\":\"Ryan\",\"age\":30,\"sex\":\"M\"}";
+
+        // when & then
+        assertThatThrownBy(() -> objectMapper.readValue(json, User.class))
+                .isInstanceOf(UnrecognizedPropertyException.class);
     }
 }
