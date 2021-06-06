@@ -152,7 +152,7 @@ class ObjectMapperTest {
     }
 
     @Test
-    void exceptionToReadValueJsonHasPropertiesThatObjectDoesNotHave() {
+    void exceptionToReadValueWithConfigurationWithFAIL_ON_UNKNOWN_PROPERTIES() {
         // given
         String json = "{\"name\":\"Ryan\",\"age\":30,\"sex\":\"M\"}";
 
