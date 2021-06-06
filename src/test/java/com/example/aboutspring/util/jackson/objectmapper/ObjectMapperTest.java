@@ -163,7 +163,7 @@ class ObjectMapperTest {
 
     @DisplayName("변환하려는 Object에 없는 필드를 JSON으로 변환하려는 경우에 사용하는 설정")
     @Test
-    void readValueJsonHasPropertiesThatObjectDoesNotHave() throws JsonProcessingException {
+    void readValueWithConfigurationWithFAIL_ON_UNKNOWN_PROPERTIES() throws JsonProcessingException {
         // given
         String json = "{\"name\":\"Ryan\",\"age\":30,\"sex\":\"M\"}";
 
