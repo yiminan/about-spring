@@ -175,4 +175,19 @@ class ObjectMapperTest {
         assertThat(user).isNotNull();
         assertThat(user).isEqualTo(new User("Ryan", 30));
     }
+
+    @DisplayName("변환하려는 Object에 있는 primitive field에 null이 들어가는 경우 실패하는 옵션을 해제")
+    @Test
+    void readValueWithConfigurationWithFAIL_ON_NULL_FOR_PRIMITIVES() throws JsonProcessingException {
+        // given
+        String json = "{\"name\":\"Ryan\",\"age\":null}";
+
+        // when
+        objectMapper.configure(DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES, false);
+        User user = objectMapper.readValue(json, User.class);
+
+        // then
+        assertThat(user).isNotNull();
+        assertThat(user).isEqualTo(new User("Ryan", 0));
+    }
 }
