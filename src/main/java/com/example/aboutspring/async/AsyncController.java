@@ -25,4 +25,18 @@ public class AsyncController {
         asyncService.asyncTest();
         System.out.println("API End!");
     }
+
+    /**
+     * API Call!
+     * Start!
+     * ...
+     * End!
+     * API End!
+     */
+    @GetMapping("/test/sync")
+    public void syncTest() {
+        System.out.println("API Call!");
+        asyncService.syncTest();
+        System.out.println("API End!");
+    }
 }
