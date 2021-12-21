@@ -3,6 +3,9 @@ package com.example.aboutspring.async;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * @see <a href="https://www.baeldung.com/spring-async">How To Do @Async in Spring</a>
+ */
 @RestController
 public class AsyncController {
 
