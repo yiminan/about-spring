@@ -11,6 +11,10 @@ public class AsyncService {
         processTestOutput();
     }
 
+    public void syncTest() {
+        processTestOutput();
+    }
+
     private void processTestOutput() {
         System.out.println("Start!");
         for (int i = 0; i < 3; i++) {
